@@ -1,7 +1,13 @@
 import json
+import random
 from markov_function.posified_text import *
 
 def produce(event, context):
+    if 'queryStringParameters' in event and event['queryStringParameters'] != None:
+        seed = event['queryStringParameters']['seed']
+        random.seed(seed)
+        print(seed)
+
     with open('markov_function/title_chain.json') as f:
         title_data = f.read()
     with open('markov_function/paragraphs_chain.json') as f:
@@ -21,9 +27,8 @@ def produce(event, context):
         'paragraphs': paragraphs_model.make_sentence()
     }
 
-    print(json.dumps(output))
-
+    #print(json.dumps(output))
     return {
-        "message": json.dumps(output),
-        "event": event
+        'statusCode': 200,
+        'body': json.dumps(output)
     }
