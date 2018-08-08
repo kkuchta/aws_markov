@@ -4,3 +4,4 @@ scraper/blog_data.json
 python_markov_function/blog_data.json
 python_markov_function/title_chain.json
 python_markov_function/paragraph_chain.json
+*.pyc
