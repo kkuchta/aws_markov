@@ -27,7 +27,7 @@ functions:
           method: get
           parameters:
             querystrings:
-              seed: false
+              title64: false
 
     package:
       exclude:
