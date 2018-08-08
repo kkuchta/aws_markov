@@ -6,7 +6,6 @@ def produce(event, context):
     if 'queryStringParameters' in event and event['queryStringParameters'] != None:
         seed = event['queryStringParameters']['seed']
         random.seed(seed)
-        print(seed)
 
     with open('markov_function/title_chain.json') as f:
         title_data = f.read()
@@ -24,7 +23,7 @@ def produce(event, context):
     # TODO: make paragraph sentences up to a certain max length
     output = {
         'title': title_model.make_short_sentence(240),
-        'paragraphs': paragraphs_model.make_sentence()
+        'paragraphs': paragraphs
     }
 
     #print(json.dumps(output))
