@@ -3,9 +3,9 @@ service: aws-markov
 provider:
   name: aws
   runtime: python3.6
-
   profile: serverless_admin
-
+  timeout: 10
+  stage: api
 
 # you can add packaging information here
 package:
