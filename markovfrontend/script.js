@@ -1,7 +1,8 @@
 console.log("here");
+const LOCAL = location.href.includes('http://localhost');
 
 //const API_URL = '/api/markov_produce_post';
-const API_URL = 'https://totes-not-amazon.com/api/markov_produce_post';
+const API_URL = LOCAL ? 'https://totes-not-amazon.com/api/markov_produce_post' : '/api/markov_produce_post';
 
 const params = new URLSearchParams(location.search.slice(1));
 let seed = params.get('s')
@@ -31,25 +32,34 @@ function updateContent(content) {
   dateElement.innerText = postedOn
 
   // Insert title in a few spots
-  for (let element of document.getElementsByClassName('title_swap')) {
+  const title_swap_elements = [].slice.call(document.getElementsByClassName('title_swap'))
+  for (let element of title_swap_elements) {
     element.innerText = content['title']
   }
-  for (let element of document.getElementsByClassName('title_swap_content')) {
+  const title_swap_content_elements = [].slice.call(document.getElementsByClassName('title_swap_content'))
+  for (let element of title_swap_content_elements) {
     element.setAttribute('content', content['title'])
   }
 
   // Insert body paragraphs
   const bodyContainer = document.getElementsByClassName('insert_post_here')[0];
-  bodyContainer.innerHTML = null;
+  bodyContainer.innerHTML = '';
+  const moreLink = ' For further details, please refer <a href="http://kevinkuchta.com">here</a>.';
+  content['paragraphs'][content['paragraphs'].length - 1] += moreLink;
   paragraphs = content['paragraphs'].map((paragraph) => {
     const paragraphElement = document.createElement('div');
     paragraphElement.setAttribute('class', 'aws-text-box');
-    paragraphElement.innerText = paragraph;
+    paragraphElement.innerHTML = paragraph;
     bodyContainer.appendChild(paragraphElement);
   })
 
   // make-title-like-this
   const urlTitle = content['title'].toLowerCase().replace(/[^a-z ]/, '').replace(/ +/g,'-')
+
+  for (let element of title_swap_elements) {
+    element.innerText = content['title']
+  }
+
 
   const newPath = [
     'about-aws',
@@ -64,7 +74,7 @@ function updateContent(content) {
   console.log("newpath = ", newPath);
 }
 
-if (location.href.includes('http://localhost')) {
+if (LOCAL) {
   updateContent({
     title: "Some title here",
     paragraphs: [
