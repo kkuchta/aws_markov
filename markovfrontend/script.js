@@ -44,7 +44,7 @@ function updateContent(content) {
   // Insert body paragraphs
   const bodyContainer = document.getElementsByClassName('insert_post_here')[0];
   bodyContainer.innerHTML = '';
-  const moreLink = ' For further details, please refer <a href="http://kevinkuchta.com">here</a>.';
+  const moreLink = ' For further details, please refer <a href="http://kevinkuchta.com/_site/2018/08/totes-not-amazon/">here</a>.';
   content['paragraphs'][content['paragraphs'].length - 1] += moreLink;
   paragraphs = content['paragraphs'].map((paragraph) => {
     const paragraphElement = document.createElement('div');
