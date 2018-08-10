@@ -24,3 +24,4 @@ exclude:
   - "scarr\\.yml"
   - "^\\.git"
   - "\\.DS_Store"
+  - "\\.psd"

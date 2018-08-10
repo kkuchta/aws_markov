@@ -20,11 +20,37 @@ function updateContent(content) {
   console.log("content = ", content);
   const year = getRandomInt(2010, (new Date()).getFullYear());
   const month = getRandomInt(1, 12);
+  const day = getRandomInt(0, 28); // Tooooo lazy for date math.
+
+  const monthString = (new Date(year, month - 1, day)).toLocaleString('en-us', { month: "short" });
+  // Jul 31, 2018
+  const postedOn = monthString + ' ' + day + ', ' + year;
+  const dateElement = document.getElementsByClassName('date')[0]
+
+  // Update post date
+  dateElement.innerText = postedOn
+
+  // Insert title in a few spots
+  for (let element of document.getElementsByClassName('title_swap')) {
+    element.innerText = content['title']
+  }
+  for (let element of document.getElementsByClassName('title_swap_content')) {
+    element.setAttribute('content', content['title'])
+  }
+
+  // Insert body paragraphs
+  const bodyContainer = document.getElementsByClassName('insert_post_here')[0];
+  bodyContainer.innerHTML = null;
+  paragraphs = content['paragraphs'].map((paragraph) => {
+    const paragraphElement = document.createElement('div');
+    paragraphElement.setAttribute('class', 'aws-text-box');
+    paragraphElement.innerText = paragraph;
+    bodyContainer.appendChild(paragraphElement);
+  })
 
   // make-title-like-this
   const urlTitle = content['title'].toLowerCase().replace(/[^a-z ]/, '').replace(/ +/g,'-')
 
-  // Update page content
   const newPath = [
     'about-aws',
     'whats-new',
@@ -32,9 +58,10 @@ function updateContent(content) {
     month,
     urlTitle
   ].join('/') + '?s=' + seed
+
+
   window.history.pushState({}, 'push state title', newPath);
   console.log("newpath = ", newPath);
-  // Update url
 }
 
 if (location.href.includes('http://localhost')) {
