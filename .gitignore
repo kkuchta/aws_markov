@@ -22,6 +22,10 @@ var/
 .DS_Store
 scraper/blog_data.json
 scraper/raw_blog.json
+scraper/blog_data*
+scraper/bodies.txt
+scraper/both.txt
+scraper/titles.txt
 *.pyc
 node_modules/*
 venv/*
