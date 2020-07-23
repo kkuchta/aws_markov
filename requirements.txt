@@ -1,4 +1,4 @@
 markovify==0.7.1
-nltk==3.3
+nltk==3.4.5
 six==1.11.0
 Unidecode==1.0.22
