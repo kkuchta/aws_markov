@@ -14,11 +14,10 @@ MAX_YEAR = Time.now.year
 conn = Faraday.new
 
 # Options (can include multiple)
-# :dump -> dumps all raw html to a json dump file
-# :parse -> parses the dump file into a nicely-formatted json file (discarding a few weird posts)
-# :export_bodies -> exports the parsed json file into a plain-text, paragraph-separated file for training (post bodies only)
-# :export_titles -> exports the parsed json file into a plain-text, newline-separated file for training (post titles only)
-operations = %i[export]
+# dump -> dumps all raw html to a json dump file
+# parse -> parses the dump file into a nicely-formatted json file (discarding a few weird posts)
+# export -> exports the parsed json file into a plain-text, newline-separated file for training (posts and titles)
+operations = %i[dump parse export]
 
 RAW_FILE = "./raw_blog.json"
 JSON_FILE = "./blog_data.json"

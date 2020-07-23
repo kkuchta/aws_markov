@@ -25,7 +25,7 @@ scraper/raw_blog.json
 scraper/blog_data*
 scraper/bodies.txt
 scraper/both.txt
-scraper/titles.txt
+scraper/title.txt
 *.pyc
 node_modules/*
 venv/*
